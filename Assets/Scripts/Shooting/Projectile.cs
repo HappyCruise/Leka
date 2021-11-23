@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
 
     public float speed; //Projectile speed
+    public int damage = 10; //How much dmg projectile does
 
     GameObject player;
     Rigidbody2D rb;
@@ -44,6 +45,7 @@ public class Projectile : MonoBehaviour
         {
             //Yes, destroy projectile
             Destroy(gameObject);
+            PlayerController.instance.HurtPlayer(damage);
         }
     }
 
