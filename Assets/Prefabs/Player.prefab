@@ -14,8 +14,7 @@ GameObject:
   - component: {fileID: 3970887888551559288}
   - component: {fileID: 1665311958180285027}
   - component: {fileID: 3067115382047678394}
-  - component: {fileID: -2037846145232594155}
-  - component: {fileID: 2003667215357829022}
+  - component: {fileID: 6103022769507243064}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -77,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -900995045
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +84,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &7685538214843675207
@@ -123,10 +122,10 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -166,11 +165,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd36abb11c13272479e4ec84141256e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelStartDelay: 1
   speed: 4
   canMove: 0
   canSword: 0
   canShoot: 0
---- !u!114 &-2037846145232594155
+  health: 100
+--- !u!114 &6103022769507243064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,21 +180,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7685538214843675204}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08a700ad82dc2f44aaa43c88513e5081, type: 3}
+  m_Script: {fileID: 11500000, guid: 44698f82f2734cb4ea5d017e5856be91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 100
-  maxHP: 100
---- !u!114 &2003667215357829022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7685538214843675204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aab909967e2c04448c69c42421c434b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shot: {fileID: 4954723134938692991, guid: cfb048657a71b8341aeab49a725c20d7, type: 3}
+  shot: {fileID: 252708373935072967, guid: c7957c843e96d9544be2c022eac844fa, type: 3}
+  startTimeBetweenShots: 0.2

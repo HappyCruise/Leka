@@ -3,23 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    public float levelStartDelay = 1f;
     public float speed = 4f; //Player speed
 
     private Rigidbody2D rb;
-
     private Vector2 mov;
-
     private Animator anim;
 
     public static PlayerController instance;
 
     public bool canMove; //Can the player move?
-
     public bool canSword; //Does the player have a sword?
-
     public bool canShoot; //Does the player have a ranged weapon?
 
     public int health = 100;
@@ -78,7 +76,31 @@ public class PlayerController : MonoBehaviour
             rb.MovePosition(rb.position + mov * speed * Time.deltaTime);
         }
     }
+    private void OnTriggerEnter2D(Collider2D collider){
+        if(collider.tag == "Enemy"){
+            HurtPlayer(20);
+        }
+        else if(collider.tag == "Exit"){
+            //Invoke restart function with given delay
+            Invoke ("Restart", levelStartDelay);
+
+            //Disable player since level is finished.
+            enabled = false;
+        }
+
+    }
+    private void Restart(){
+        SceneManager.LoadScene(0);
+    }
+
     public void HurtPlayer(int damageToGive){
         health -= damageToGive;
+        
+        CheckIfGameOver();
+    }
+    public void CheckIfGameOver(){
+        if(health <= 0){
+            GameManager.instance.GameOver();
+        }
     }
 }

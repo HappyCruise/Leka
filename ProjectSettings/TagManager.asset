@@ -8,6 +8,8 @@ TagManager:
   - Exit
   - Enemy
   - Soda
+  - Projectile
+  - Wall
   layers:
   - Default
   - TransparentFX
