@@ -15,14 +15,14 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
 
     public static PlayerController instance;
-
+    
     public bool canMove; //Can the player move?
-    public bool canSword; //Does the player have a sword?
+    public bool canMelee; //Can the player melee
     public bool canShoot; //Does the player have a ranged weapon?
-
     public int health = 100;
     void Start()
     {
+        
         //If player doesnt exist
         if (instance == null)
         {
@@ -81,13 +81,15 @@ public class PlayerController : MonoBehaviour
             HurtPlayer(20);
         }
         else if(collider.tag == "Exit"){
-            //Invoke restart function with given delay
-            Invoke ("Restart", levelStartDelay);
-
-            //Disable player since level is finished.
-            enabled = false;
+            if(GameObject.FindWithTag("Enemy") != null){
+                Debug.Log("Enemies alive, cant move to next level");
+            }else{
+                //Invoke restart function with given delay
+                Invoke ("Restart", levelStartDelay);
+                //Disable player since level is finished.
+                enabled = false;
+            }
         }
-
     }
     private void Restart(){
         SceneManager.LoadScene(0);

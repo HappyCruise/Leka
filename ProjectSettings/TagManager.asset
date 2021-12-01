@@ -10,6 +10,7 @@ TagManager:
   - Soda
   - Projectile
   - Wall
+  - DestroyableWall
   layers:
   - Default
   - TransparentFX
