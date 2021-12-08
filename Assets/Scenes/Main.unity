@@ -744,9 +744,19 @@ PrefabInstance:
       objectReference: {fileID: 938610333}
     - target: {fileID: 3067115382047678394, guid: 4796e87603774484d9660bdfa72946e4,
         type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 938610337}
+    - target: {fileID: 3067115382047678394, guid: 4796e87603774484d9660bdfa72946e4,
+        type: 3}
       propertyPath: levelStartDelay
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3067115382047678394, guid: 4796e87603774484d9660bdfa72946e4,
+        type: 3}
+      propertyPath: gameManagerHolder
+      value: 
+      objectReference: {fileID: 938610333}
     - target: {fileID: 7685538214843675204, guid: 4796e87603774484d9660bdfa72946e4,
         type: 3}
       propertyPath: m_Name

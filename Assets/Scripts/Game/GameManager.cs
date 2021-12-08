@@ -21,14 +21,15 @@ public class GameManager : MonoBehaviour
     //Store a reference to BoardManager which will setup the level layout
     private BoardManager boardScript;
 
-    //Current level
-    private int level = 1;
-
-    //Check if level is being loaded, prevent player from moving.
-    private bool doingSetup = true;
+    private bool firstLevel = true;
+    private int level;
 
     void Awake()
     {
+         //Find the image 
+        levelImage = GameObject.Find("LevelImage");
+        //Find the text
+        levelText = GameObject.Find("LevelText").GetComponent<Text>();
         //Check if instance exists
         if (instance == null)
         {
@@ -48,43 +49,39 @@ public class GameManager : MonoBehaviour
         boardScript = GetComponent<BoardManager>();
 
         //Initialize first level
-        InitGame();
+        if(firstLevel){
+            InitGame(1);
+            firstLevel = false;
+            
+        }
+        
     }
 
-    //This is called everytime a new level is loaded
-    void OnLevelWasLoaded(int index)
-    {
-        level++;
-        //Initialize board
-        InitGame();
-    }
+
 
     //Initialize the level
-    void InitGame()
+    public void InitGame(int lvl)
     {
-        //prevent player from moving
-        doingSetup = true;
-        //Find the image and text
-        levelImage = GameObject.Find("LevelImage");
-        levelText = GameObject.Find("LevelText").GetComponent<Text>();
-
-        //Set the text
-        levelText.text = "Level " + level;
-        //Display image
+    
+         //Display image
         levelImage.SetActive(true);
+        
+        //Set the text
+        levelText.text = "Level " + lvl;
+        
 
         //Hide image after delay
         Invoke("HideLevelImage", levelStartDelay);
-
-        boardScript.SetupScene(level);
+        Debug.Log("SETTING UP LEVEL "+ lvl);
+        boardScript.SetupScene(lvl);
+        level = lvl;
+         
     }
 
     void HideLevelImage()
     {
         //Hide image
-        levelImage.SetActive(false);
-        //Allow player to move
-        doingSetup = false;
+        levelImage.SetActive(false);  
     }
 
     // Update is called once per frame

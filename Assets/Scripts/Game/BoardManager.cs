@@ -7,10 +7,12 @@ using Random = UnityEngine.Random;
 public class BoardManager : MonoBehaviour
 {
     //Using Serializable allows us to embed a class with sub properties in the inspector.
-    [Serializable] public class Count
+    [Serializable]
+    public class Count
     {
         //Min Max values for Count class
         public int minimum;
+
         public int maximum;
 
         public Count(int min, int max)
@@ -22,20 +24,26 @@ public class BoardManager : MonoBehaviour
 
     //Board size
     public int columns = 10;
+
     public int rows = 12;
 
     public Count wallCount = new Count(5, 9); //How many walls to place on the board
 
     public GameObject exit; //Prefab for the door to next level
+
     public GameObject[] floorTiles; //Floor prefabs
+
     public GameObject[] wallTiles; //Wall prefabs
+
     public GameObject[] enemyTiles; //Enemy prefabs
+
     public GameObject[] outerWallTiles; //Outer wall prefabs
 
     private Transform boardHolder; // Reference to board objects transform
 
     //Possible locations to place tiles
     private List<Vector3> gridPositions = new List<Vector3>();
+
 
     //Clear gridPositions and prepare for new board
     void InitialiseList()
@@ -57,6 +65,14 @@ public class BoardManager : MonoBehaviour
     //Setup outer walls and floor
     void BoardSetup()
     {
+        //CLEAR ALL ITEMS AND WALLS
+        GameObject[] objectsToDestroy;
+        objectsToDestroy = GameObject.FindGameObjectsWithTag("DestroyableWall");
+        foreach (GameObject obj in objectsToDestroy)
+        {
+            Destroy(obj);   
+        }
+        
         //Instantiate Board and set boardHolder to its transform
         boardHolder = new GameObject("Board").transform;
 
@@ -65,17 +81,24 @@ public class BoardManager : MonoBehaviour
         {
             for (int y = -1; y < rows + 1; y++)
             {
-                //Choose random tile to place
-                GameObject toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
+                //Choose random floor tile to place
+                GameObject toInstantiate =
+                    floorTiles[Random.Range(0, floorTiles.Length)];
 
                 //If on the edge of board, place outerwall instead
                 if (x == -1 || x == columns || y == -1 || y == rows)
-                    toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                    toInstantiate =
+                        outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+
                 //Instantiate GameObject instance using chosen prefab at the Vector3 corresponding to current grid position in loop, then cast it to GameObject.
-                GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+                GameObject instance =
+                    Instantiate(toInstantiate,
+                    new Vector3(x, y, 0f),
+                    Quaternion.identity) as
+                    GameObject;
 
                 //Set the parent of new object to boardHolder to avoid cluttering hierarchy
-                instance.transform.SetParent(boardHolder);
+                instance.transform.SetParent (boardHolder);
             }
         }
     }
@@ -89,25 +112,26 @@ public class BoardManager : MonoBehaviour
         Vector3 randomPosition = gridPositions[randomIndex];
 
         //Remove used position from list
-        gridPositions.RemoveAt(randomIndex);
+        gridPositions.RemoveAt (randomIndex);
 
         //Return random position
         return randomPosition;
     }
 
     //Layout array of gameObjects at random places with min-max range for amount of items.
-    void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum){
-        
+    void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum)
+    {
         //Choose random number of objects within min and max limits
-        int objectCount = Random.Range(minimum, maximum +1);
+        int objectCount = Random.Range(minimum, maximum + 1);
+        
 
         //Instantiate objects until randomly chosen limit is reached
-        for ( int i = 0; i < objectCount; i++){
-            //Choose position by random
+        for (int i = 0; i < objectCount; i++)
+        {
             Vector3 randomPosition = RandomPosition();
-
             //Choose random tile from array and assign it to chosen tile
-            GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
+            GameObject tileChoice =
+                tileArray[Random.Range(0, tileArray.Length)];
 
             //Instantiate tileChoice at the random position
             Instantiate(tileChoice, randomPosition, Quaternion.identity);
@@ -115,7 +139,8 @@ public class BoardManager : MonoBehaviour
     }
 
     //SetupScene initializes level and calls previous functions to layout tiles
-    public void SetupScene(int level){
+    public void SetupScene(int level)
+    {
         //Creates the outer walls and floor.
         BoardSetup();
 
@@ -126,12 +151,14 @@ public class BoardManager : MonoBehaviour
         LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
 
         //Determine number of eneies based on current level
-        int enemyCount = (int)Mathf.Log(level, 2f);
-
+        int enemyCount = (int) Mathf.Log(level, 2f);
+      
         //Instantiate a random number of enemies
-        LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
+        LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 
         //Instantiate the exit tile (always in the same position);
-        Instantiate(exit, new Vector3(columns-1, rows-1, 0f), Quaternion.identity);
+        Instantiate(exit,
+        new Vector3(columns - 1, rows - 1, 0f),
+        Quaternion.identity);
     }
 }
