@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     //Text to display current level number
     private Text levelText;
+    private GameObject healthText; //Current health text object. ( Used to hide it during level loading )
 
     //Image that covers the level while its loading
     private GameObject levelImage;
@@ -26,10 +27,12 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-         //Find the image 
+        //Find the image 
         levelImage = GameObject.Find("LevelImage");
         //Find the text
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
+
+        healthText = GameObject.Find("HealthText"); //Find the food text
         //Check if instance exists
         if (instance == null)
         {
@@ -49,12 +52,13 @@ public class GameManager : MonoBehaviour
         boardScript = GetComponent<BoardManager>();
 
         //Initialize first level
-        if(firstLevel){
+        if (firstLevel)
+        {
             InitGame(1);
             firstLevel = false;
-            
+
         }
-        
+
     }
 
 
@@ -62,26 +66,30 @@ public class GameManager : MonoBehaviour
     //Initialize the level
     public void InitGame(int lvl)
     {
-    
-         //Display image
+
+
+        healthText.SetActive(false); //Hide the health text while starting level
+        //Display image
         levelImage.SetActive(true);
-        
+
         //Set the text
         levelText.text = "Level " + lvl;
-        
+
 
         //Hide image after delay
         Invoke("HideLevelImage", levelStartDelay);
-        Debug.Log("SETTING UP LEVEL "+ lvl);
+        Debug.Log("SETTING UP LEVEL " + lvl);
         boardScript.SetupScene(lvl);
         level = lvl;
-         
+
     }
 
     void HideLevelImage()
     {
         //Hide image
-        levelImage.SetActive(false);  
+        levelImage.SetActive(false);
+
+        healthText.SetActive(true); //Show healthText again.
     }
 
     // Update is called once per frame

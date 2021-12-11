@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     private int level = 2;
     public float levelStartDelay = 1f;
-    private bool doingSetup=false;
+    private bool doingSetup = false;
     public float speed = 4f; //Player speed
 
     private Rigidbody2D rb;
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 mov;
 
     private Animator anim;
-    private Vector3 startPos = new Vector3(0,0,0f);
+    private Vector3 startPos = new Vector3(0, 0, 0f);
     public static PlayerController instance;
 
     public bool canMove; //Can the player move?
@@ -26,7 +26,11 @@ public class PlayerController : MonoBehaviour
 
     public bool canShoot; //Does the player have a ranged weapon?
 
-    public int health = 100;
+    private PlayerHealth healthManager;
+
+    private SpriteRenderer spriteRenderer;
+
+
 
     void Start()
     {
@@ -38,8 +42,10 @@ public class PlayerController : MonoBehaviour
         } //If more than one player exists
         else if (instance != this)
         {
-            Destroy (gameObject);
+            Destroy(gameObject);
         }
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        healthManager = GetComponent<PlayerHealth>();
 
         //Initialise RigidBody and Animator
         rb = GetComponent<Rigidbody2D>();
@@ -58,6 +64,15 @@ public class PlayerController : MonoBehaviour
         mov =
             new Vector2(Input.GetAxisRaw("Horizontal"),
                 Input.GetAxisRaw("Vertical"));
+        if (mov.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (mov.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+
     }
 
     void Animations()
@@ -85,17 +100,24 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.tag == "Enemy")
+        // if (collider.tag == "Enemy")
+        // {
+        //     HurtPlayer(20);
+        // }
+        if (collider.tag == "Food")
         {
-            HurtPlayer(20);
+            healthManager.AddPlayerHealth(UnityEngine.Random.Range(4, 20));
+            Destroy(collider.gameObject);
         }
+
+
         else if (collider.tag == "Exit")
         {
             if (GameObject.FindWithTag("Enemy") != null)
             {
                 Debug.Log("Enemies alive, cant move to next level");
             }
-            else if(doingSetup == false)
+            else if (doingSetup == false)
             {
                 doingSetup = true;
                 //Invoke restart function with given delay
@@ -109,26 +131,12 @@ public class PlayerController : MonoBehaviour
 
     private void Restart()
     {
-       Debug.Log("STARTING NEW LEVEL FROM PLAYER");
-       GameManager.instance.InitGame(level);
-       transform.position = startPos;
-       enabled=true;
-       level++;
-       doingSetup = false;
+        Debug.Log("STARTING NEW LEVEL FROM PLAYER");
+        GameManager.instance.InitGame(level);
+        transform.position = startPos;
+        enabled = true;
+        level++;
+        doingSetup = false;
     }
 
-    public void HurtPlayer(int damageToGive)
-    {
-        health -= damageToGive;
-
-        CheckIfGameOver();
-    }
-
-    public void CheckIfGameOver()
-    {
-        if (health <= 0)
-        {
-            GameManager.instance.GameOver();
-        }
-    }
 }

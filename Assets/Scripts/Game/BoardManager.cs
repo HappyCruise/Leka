@@ -28,12 +28,14 @@ public class BoardManager : MonoBehaviour
     public int rows = 12;
 
     public Count wallCount = new Count(5, 9); //How many walls to place on the board
+    public Count foodCount = new Count(1, 5); //How many foodtiles to place on the board
 
     public GameObject exit; //Prefab for the door to next level
 
     public GameObject[] floorTiles; //Floor prefabs
 
     public GameObject[] wallTiles; //Wall prefabs
+    public GameObject[] foodTiles;  //Array of food prefabs.
 
     public GameObject[] enemyTiles; //Enemy prefabs
 
@@ -51,10 +53,10 @@ public class BoardManager : MonoBehaviour
         gridPositions.Clear();
 
         //Loop trough columns (x axis)
-        for (int x = 1; x < columns; x++)
+        for (int x = 4; x < columns; x++) //Dont spawn objects within the 1st 3 tiles to give room for player
         {
             //Loop trough rows (y axis)
-            for (int y = 1; y < rows; y++)
+            for (int y = 4; y < rows; y++) //Dont spawn objects within the 1st 3 tiles to give room for player
             {
                 //For each position add a new Vector3 to gridPositions with coordinates
                 gridPositions.Add(new Vector3(x, y, 0f));
@@ -70,9 +72,9 @@ public class BoardManager : MonoBehaviour
         objectsToDestroy = GameObject.FindGameObjectsWithTag("DestroyableWall");
         foreach (GameObject obj in objectsToDestroy)
         {
-            Destroy(obj);   
+            Destroy(obj);
         }
-        
+
         //Instantiate Board and set boardHolder to its transform
         boardHolder = new GameObject("Board").transform;
 
@@ -98,7 +100,7 @@ public class BoardManager : MonoBehaviour
                     GameObject;
 
                 //Set the parent of new object to boardHolder to avoid cluttering hierarchy
-                instance.transform.SetParent (boardHolder);
+                instance.transform.SetParent(boardHolder);
             }
         }
     }
@@ -112,7 +114,7 @@ public class BoardManager : MonoBehaviour
         Vector3 randomPosition = gridPositions[randomIndex];
 
         //Remove used position from list
-        gridPositions.RemoveAt (randomIndex);
+        gridPositions.RemoveAt(randomIndex);
 
         //Return random position
         return randomPosition;
@@ -123,7 +125,7 @@ public class BoardManager : MonoBehaviour
     {
         //Choose random number of objects within min and max limits
         int objectCount = Random.Range(minimum, maximum + 1);
-        
+
 
         //Instantiate objects until randomly chosen limit is reached
         for (int i = 0; i < objectCount; i++)
@@ -151,10 +153,13 @@ public class BoardManager : MonoBehaviour
         LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
 
         //Determine number of eneies based on current level
-        int enemyCount = (int) Mathf.Log(level, 2f);
-      
+        int enemyCount = (int)Mathf.Log(level, 2f);
+
         //Instantiate a random number of enemies
-        LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
+        LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
+
+        //Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
+        LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
 
         //Instantiate the exit tile (always in the same position);
         Instantiate(exit,

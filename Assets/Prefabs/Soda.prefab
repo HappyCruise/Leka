@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5601918637205588111}
   m_Layer: 0
   m_Name: Soda
-  m_TagString: Soda
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
