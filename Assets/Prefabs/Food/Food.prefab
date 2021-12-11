@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7494668906974603505}
   - component: {fileID: 8270453379797520914}
-  - component: {fileID: 2763950575601650832}
+  - component: {fileID: -4853648918271107754}
   m_Layer: 0
   m_Name: Food
   m_TagString: Food
@@ -83,8 +83,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2763950575601650832
-BoxCollider2D:
+--- !u!60 &-4853648918271107754
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106,6 +106,12 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.030038964, y: 0.13396427}
+      - {x: -0.32929653, y: 0.0643034}
+      - {x: -0.46875, y: -0.09375}
+      - {x: -0.36054656, y: -0.23856097}
+      - {x: 0.3623499, y: -0.2728254}
+      - {x: 0.46875, y: 0.125}
+      - {x: 0.21875, y: 0.3125}

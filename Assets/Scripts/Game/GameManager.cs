@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         //Set the levelText to display game over message
-        levelText.text = "After " + level + " crueling levels, our hero falls to the ground.";
+        levelText.text = "You died after " + level + " levels";
 
         //Enable the image
         levelImage.SetActive(true);

@@ -6,19 +6,23 @@ public class PlayerProjectile : MonoBehaviour
 {
     //Flags for moving direction
     [HideInInspector]
-    public float xDir = 0;
+    public int xDir = 0;
 
     [HideInInspector]
-    public float yDir = 0;
+    public int yDir = 0;
+
 
     public Rigidbody2D rb;
 
-    public float speed = 6;
+    private SpriteRenderer spriteRenderer;
 
+    public float speed = 6; //Movement Speed
     public int damage = 10;
-    public int wallDamage=1;
+    public int wallDamage = 1;
+
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -29,10 +33,12 @@ public class PlayerProjectile : MonoBehaviour
         if (xDir == 1)
         {
             rb.velocity = transform.right * speed;
+            spriteRenderer.flipX = true;
         }
         else if (xDir == -1)
         {
             rb.velocity = -transform.right * speed;
+            spriteRenderer.flipX = false;
         }
         else if (yDir == 1)
         {
@@ -49,7 +55,7 @@ public class PlayerProjectile : MonoBehaviour
         if (coll.tag == "Enemy")
         {
             Destroy(coll.gameObject);
-            Destroy (gameObject);
+            Destroy(gameObject);
             //TODO: DAMAGE ENEMY
             /* 
             coll.GetComponent<SCRIPTNAME>.TakeDamage(damage);
@@ -57,9 +63,10 @@ public class PlayerProjectile : MonoBehaviour
         }
         else if (coll.tag == "Wall")
         {
-            Destroy (gameObject);   
+            Destroy(gameObject);
         }
-        else if(coll.tag == "DestroyableWall"){
+        else if (coll.tag == "DestroyableWall")
+        {
             Destroy(gameObject);
             coll.GetComponent<DestroyableWall>().DamageWall(wallDamage);
         }
@@ -67,6 +74,6 @@ public class PlayerProjectile : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        Destroy (gameObject);
+        Destroy(gameObject);
     }
 }

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 252708373935072987}
   - component: {fileID: 252708373935072984}
   - component: {fileID: 252708373935072985}
-  - component: {fileID: 252708373935072966}
   - component: {fileID: 970559359422613739}
+  - component: {fileID: 594976148373699956}
   m_Layer: 8
   m_Name: PlayerProjectile
   m_TagString: Projectile
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 252708373935072967}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.65, y: 16.36, z: 0.166556}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,7 +95,7 @@ SpriteRenderer:
   m_SortingLayerID: 1861650685
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 3d30f1b0ee4195c4ea6777a00e0a6f56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,22 +106,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &252708373935072966
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 252708373935072967}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.001730144, y: 0.00040912628}
-  serializedVersion: 2
-  m_Radius: 0.08853811
 --- !u!114 &970559359422613739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,4 +121,22 @@ MonoBehaviour:
   xDir: 0
   yDir: 0
   rb: {fileID: 252708373935072984}
-  speed: 6
+  speed: 10
+  damage: 10
+  wallDamage: 1
+--- !u!58 &594976148373699956
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252708373935072967}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0010252297, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.06328896

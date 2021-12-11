@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 281453673158831342}
   - component: {fileID: 1811301034899543565}
-  - component: {fileID: 5601918637205588111}
+  - component: {fileID: 1281748027711975047}
+  - component: {fileID: 3532132427547422425}
   m_Layer: 0
   m_Name: Soda
   m_TagString: Food
@@ -83,8 +84,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5601918637205588111
-BoxCollider2D:
+--- !u!50 &1281748027711975047
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922877009085089954}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!60 &3532132427547422425
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106,6 +128,15 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.44048813, y: -0.3088932}
+      - {x: -0.44770166, y: -0.41766268}
+      - {x: -0.4375, y: -0.5}
+      - {x: 0.5, y: -0.5}
+      - {x: 0.49898368, y: -0.0063455105}
+      - {x: 0.30703717, y: 0.021588027}
+      - {x: 0.24394481, y: 0.5018034}
+      - {x: 0.0877738, y: 0.50360674}
+      - {x: -0.077622145, y: 0.12165903}
+      - {x: -0.35333297, y: -0.01501948}
