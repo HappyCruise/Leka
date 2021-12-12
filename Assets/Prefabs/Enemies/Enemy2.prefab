@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da893f448bc82541a4d3a8c7d051d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDamage: 2
+  playerDamage: 10
   attackSound1: {fileID: 0}
   attackSound2: {fileID: 0}
   moveTime: 0.1
