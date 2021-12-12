@@ -29,8 +29,7 @@ public class GameManager : MonoBehaviour
     //Store a reference to BoardManager which will setup the level layout
     private BoardManager boardScript;
 
-    private bool firstLevel = true;
-    private int level;
+    private int level; //Current level
 
     void Awake()
     {
