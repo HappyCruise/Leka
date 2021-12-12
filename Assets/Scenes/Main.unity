@@ -653,6 +653,11 @@ PrefabInstance:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 1665769845}
+    - target: {fileID: 3925824158016361579, guid: 4796e87603774484d9660bdfa72946e4,
+        type: 3}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 1665769845}
     - target: {fileID: 3067115382047678394, guid: 4796e87603774484d9660bdfa72946e4,
         type: 3}
       propertyPath: canMelee

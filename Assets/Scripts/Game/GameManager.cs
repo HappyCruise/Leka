@@ -78,14 +78,6 @@ public class GameManager : MonoBehaviour
         
         //Set the text
         levelText.text = "Level " + lvl;
-        
-
-        //Set the text
-        levelText.text = "Level " + lvl;
-
-
-        //Set the text
-        levelText.text = "Level " + lvl;
 
 
         //Hide image after delay
