@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
         deathImage.SetActive(true);
 
         //Disable this manager 
-        // enabled = false;
+        //enabled = false;
     }
 
     public void OpenMainMenu()

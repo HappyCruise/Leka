@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     public float maxHP = 100; //Max health
     private bool firstLevel = true;
     private Animator animator;
+    public AudioClip gameOverSound;				//Audio clip to play when player dies.
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +77,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHP <= 0)
         {
+            SoundManager.instance.PlaySingle (gameOverSound);
             GameManager.instance.GameOver();
             return true;
         }

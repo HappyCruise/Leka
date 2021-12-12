@@ -12,8 +12,13 @@ public class PlayerController : MonoBehaviour
     private bool doingSetup = false;
     public float speed = 4f; //Player speed
 
-    private Rigidbody2D rb;
+    public AudioClip moveSound1;				//1 of 2 Audio clips to play when player moves.
+	public AudioClip eatSound1;					//1 of 2 Audio clips to play when player collects a food object.
+	public AudioClip drinkSound1;				//1 of 2 Audio clips to play when player collects a soda object.
+	
+		
 
+    private Rigidbody2D rb;
     private Vector2 mov;
 
     private Animator anim;
@@ -73,7 +78,6 @@ public class PlayerController : MonoBehaviour
         {
             spriteRenderer.flipX = true;
         }
-
     }
 
     void Animations()
@@ -81,7 +85,6 @@ public class PlayerController : MonoBehaviour
         //If player is moving
         if (canMove && mov != Vector2.zero)
         {
-            //TODO: ADD ANIMATIONS;
         }
         else
         {
@@ -95,7 +98,7 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             //moving the player
-            rb.MovePosition(rb.position + mov * speed * Time.deltaTime);
+            rb.MovePosition(rb.position + mov * speed * Time.deltaTime);   
         }
     }
 
@@ -104,6 +107,7 @@ public class PlayerController : MonoBehaviour
         if (collider.tag == "Food")
         {
             healthManager.AddPlayerHealth(UnityEngine.Random.Range(4, 20));
+            SoundManager.instance.RandomizeSfx (eatSound1, drinkSound1);
             Destroy(collider.gameObject);
         }
 
