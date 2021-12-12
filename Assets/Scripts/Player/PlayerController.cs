@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         healthManager = GetComponent<PlayerHealth>();
 
@@ -100,16 +101,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        // if (collider.tag == "Enemy")
-        // {
-        //     HurtPlayer(20);
-        // }
         if (collider.tag == "Food")
         {
             healthManager.AddPlayerHealth(UnityEngine.Random.Range(4, 20));
             Destroy(collider.gameObject);
         }
 
+        else if (collider.tag == "Enemy")
+        {
+            healthManager.HurtPlayer(50);
+        }
 
         else if (collider.tag == "Exit")
         {
