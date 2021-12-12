@@ -12,6 +12,7 @@ TagManager:
   - Wall
   - DestroyableWall
   - OuterWall
+  - Boss
   layers:
   - Default
   - TransparentFX
