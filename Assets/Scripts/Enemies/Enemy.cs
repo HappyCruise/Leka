@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 	{
-		public int playerDamage; 							//The amount of food points to subtract from the player when attacking.
+		public int playerDamage; 							//The amount of health points to subtract from the player when attacking.
 		public AudioClip attackSound1;						//First of two audio clips to play when attacking the player.
 		public AudioClip attackSound2;
 
@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour
 
 		private float wallStartTime=1.0f;
 		private float wallTime=0;
+
+		private PlayerHealth healthManager;
 		
 		private SpriteRenderer spriteRenderer;
 		
@@ -177,7 +179,7 @@ public class Enemy : MonoBehaviour
 				yDir = -1;
 			
 			//Call the AttemptMove function and pass in the generic parameter Player, because Enemy is moving and expecting to potentially encounter a Player
-			AttemptMove <PlayerController> (xDir, yDir);
+			AttemptMove <PlayerHealth> (xDir, yDir);
 		}
 
 		void OnCantMove <T> (T component)
@@ -185,7 +187,7 @@ public class Enemy : MonoBehaviour
 		{
 			
 			//Declare hitPlayer and set it to equal the encountered component.
-			PlayerController hitPlayer = component as PlayerController;
+			PlayerHealth hitPlayer = component as PlayerHealth;
 			
 
 			if(timeBetweenAttacks <=0){

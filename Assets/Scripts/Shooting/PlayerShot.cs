@@ -64,43 +64,44 @@ public class PlayerShot : MonoBehaviour
             {
                 timeBetweenShots -= Time.deltaTime;
             }
-        }else if( playerMelee){
-            if (Input.GetKey(KeyCode.RightArrow) && timeBetweenShots <= 0)
-            {
-                GameObject go =
-                    (GameObject)
-                    Instantiate(melee, transform.position, Quaternion.identity);
-                timeBetweenShots = startTimeBetweenShots;
-                go.GetComponent<MeleeCheck>().xDir = 1;
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow) && timeBetweenShots <= 0)
-            {
-                GameObject go =
-                    (GameObject)
-                    Instantiate(melee, transform.position, Quaternion.identity);
-                timeBetweenShots = startTimeBetweenShots;
-                go.GetComponent<MeleeCheck>().xDir = -1;
-            }
-            else if (Input.GetKey(KeyCode.UpArrow) && timeBetweenShots <= 0)
-            {
-                GameObject go =
-                    (GameObject)
-                    Instantiate(melee, transform.position, Quaternion.identity);
-                timeBetweenShots = startTimeBetweenShots;
-                go.GetComponent<MeleeCheck>().yDir = 1;
-            }
-            else if (Input.GetKey(KeyCode.DownArrow) && timeBetweenShots <= 0)
-            {
-                GameObject go =
-                    (GameObject)
-                    Instantiate(melee, transform.position, Quaternion.identity);
-                timeBetweenShots = startTimeBetweenShots;
-                go.GetComponent<MeleeCheck>().yDir = -1;
-            }
-            else
-            {
-                timeBetweenShots -= Time.deltaTime;
-            }
+            //EI TOIMI VIEL SAATANA :d
+        // }else if( playerMelee){
+        //     if (Input.GetKey(KeyCode.RightArrow) && timeBetweenShots <= 0)
+        //     {
+        //         GameObject go =
+        //             (GameObject)
+        //             Instantiate(melee, transform.position, Quaternion.identity);
+        //         timeBetweenShots = startTimeBetweenShots;
+        //         go.GetComponent<MeleeCheck>().xDir = 1;
+        //     }
+        //     else if (Input.GetKey(KeyCode.LeftArrow) && timeBetweenShots <= 0)
+        //     {
+        //         GameObject go =
+        //             (GameObject)
+        //             Instantiate(melee, transform.position, Quaternion.identity);
+        //         timeBetweenShots = startTimeBetweenShots;
+        //         go.GetComponent<MeleeCheck>().xDir = -1;
+        //     }
+        //     else if (Input.GetKey(KeyCode.UpArrow) && timeBetweenShots <= 0)
+        //     {
+        //         GameObject go =
+        //             (GameObject)
+        //             Instantiate(melee, transform.position, Quaternion.identity);
+        //         timeBetweenShots = startTimeBetweenShots;
+        //         go.GetComponent<MeleeCheck>().yDir = 1;
+        //     }
+        //     else if (Input.GetKey(KeyCode.DownArrow) && timeBetweenShots <= 0)
+        //     {
+        //         GameObject go =
+        //             (GameObject)
+        //             Instantiate(melee, transform.position, Quaternion.identity);
+        //         timeBetweenShots = startTimeBetweenShots;
+        //         go.GetComponent<MeleeCheck>().yDir = -1;
+        //     }
+            // else
+            // {
+            //     timeBetweenShots -= Time.deltaTime;
+            // }
         }
     }
 }
