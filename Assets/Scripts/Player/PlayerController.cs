@@ -129,8 +129,8 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("STARTING NEW LEVEL FROM PLAYER");
         GameManager.instance.InitGame(level);
-        transform.position = startPos;
-        enabled = true;
+        transform.position = startPos; //Move the player to 0,0
+        enabled = true; //Re-enable player after level has been loaded
         level++;
         doingSetup = false;
     }
