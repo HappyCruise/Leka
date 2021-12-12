@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
 
 		public float moveTime = 0.1f;			//Time it will take object to move, in seconds.
 		public LayerMask blockingLayer;			//Layer on which collision will be checked.
-		 public float speed = 1f;
 		private Animator animator;							//Variable of type Animator to store a reference to the enemy's Animator component.
 		private Transform target;
 		 public bool canMove;
@@ -27,8 +26,6 @@ public class Enemy : MonoBehaviour
 
 		private float wallStartTime=1.0f;
 		private float wallTime=0;
-
-		private PlayerHealth healthManager;
 		
 		private SpriteRenderer spriteRenderer;
 		
@@ -200,6 +197,8 @@ public class Enemy : MonoBehaviour
 			
 			//Set the attack trigger of animator to trigger Enemy attack animation.
 			animator.SetTrigger ("enemyAttack");
+
+			SoundManager.instance.RandomizeSfx (attackSound1, attackSound2);
 
 		}
 
