@@ -28,7 +28,7 @@ public class BoardManager : MonoBehaviour
     public int rows = 12;
 
     public Count wallCount = new Count(5, 9); //How many walls to place on the board
-    public Count foodCount = new Count(1, 5); //How many foodtiles to place on the board
+    public Count foodCount = new Count(1, 3); //How many foodtiles to place on the board
 
     public GameObject exit; //Prefab for the door to next level
 
@@ -68,11 +68,13 @@ public class BoardManager : MonoBehaviour
     void BoardSetup()
     {
         //CLEAR ALL ITEMS AND WALLS
-        GameObject[] objectsToDestroy;
-        objectsToDestroy = GameObject.FindGameObjectsWithTag("DestroyableWall");
+        
+        List<GameObject> objectsToDestroy = new List<GameObject>(GameObject.FindGameObjectsWithTag("DestroyableWall"));
+        objectsToDestroy.AddRange(new List<GameObject> (GameObject.FindGameObjectsWithTag("Food")));
+        
         foreach (GameObject obj in objectsToDestroy)
         {
-            Destroy(obj);
+            Destroy(obj);   
         }
 
         //Instantiate Board and set boardHolder to its transform
@@ -150,8 +152,6 @@ public class BoardManager : MonoBehaviour
 
         //Instantiate a random number of wall tiles
         LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
-
-        LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
 
         //Determine number of eneies based on current level
         int enemyCount = (int) Mathf.Log(level, 2f);
