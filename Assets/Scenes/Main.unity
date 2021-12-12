@@ -308,7 +308,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 644788301}
-  - component: {fileID: 644788300}
   - component: {fileID: 644788299}
   m_Layer: 0
   m_Name: SoundManager
@@ -332,102 +331,6 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!82 &644788300
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644788297}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -704,6 +607,9 @@ MonoBehaviour:
   wallCount:
     minimum: 5
     maximum: 9
+  foodCount:
+    minimum: 1
+    maximum: 5
   exit: {fileID: 214823565797993208, guid: 5313664cf320f5e42894bdb2dbd69d23, type: 3}
   floorTiles:
   - {fileID: 5475119712655370047, guid: e60229921b394c74395acc6bdd89bcf9, type: 3}
@@ -718,9 +624,13 @@ MonoBehaviour:
   - {fileID: 1874232073019999089, guid: 356424f5bb8e07d48a0b033666738138, type: 3}
   - {fileID: 6608255103355419959, guid: 4aae96622d4646848a4c573feed5f318, type: 3}
   - {fileID: 3691082589069352594, guid: 1c3b9eb4fdda5694db0b6125a2a511bf, type: 3}
+  foodTiles:
+  - {fileID: 4922877009085089954, guid: 649807d03f87d124797fb994fb8b09ef, type: 3}
+  - {fileID: 3437398498176847037, guid: c6657ffded301a142be1dc81674ebfa7, type: 3}
   enemyTiles:
   - {fileID: 2013788618056520730, guid: 4909896ed1a00b44687bd2d7bfd8cc2e, type: 3}
   - {fileID: 4584506481601367508, guid: 271e275f65137b8488d461c8e2ea2688, type: 3}
+  - {fileID: 3301419590853229770, guid: f479b78c2f29b5b4585b465398e11dca, type: 3}
   outerWallTiles:
   - {fileID: 1949462180548327240, guid: ff6368161228a6a45882c74a55755dac, type: 3}
   - {fileID: 3720401099461016151, guid: 0a42e426ae30f5a4a94d8abe960d23bb, type: 3}
@@ -736,6 +646,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_GravityScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067115382047678394, guid: 4796e87603774484d9660bdfa72946e4,
+        type: 3}
+      propertyPath: canMelee
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3067115382047678394, guid: 4796e87603774484d9660bdfa72946e4,
         type: 3}

@@ -55,7 +55,7 @@ public class PlayerProjectile : MonoBehaviour
             coll.GetComponent<SCRIPTNAME>.TakeDamage(damage);
              */
         }
-        else if (coll.tag == "Wall")
+        else if (coll.tag == "Wall" || coll.tag=="OuterWall")
         {
             Destroy (gameObject);   
         }

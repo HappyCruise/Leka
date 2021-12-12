@@ -7,30 +7,36 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    private int level = 2;
     public float levelStartDelay = 1f;
+    private bool doingSetup=false;
     public float speed = 4f; //Player speed
 
     private Rigidbody2D rb;
-    private Vector2 mov;
-    private Animator anim;
 
+    private Vector2 mov;
+
+    private Animator anim;
+    private Vector3 startPos = new Vector3(0,0,0f);
     public static PlayerController instance;
-    
+
     public bool canMove; //Can the player move?
+
     public bool canMelee; //Can the player melee
+
     public bool canShoot; //Does the player have a ranged weapon?
+
     public int health = 100;
+
     void Start()
     {
-        
         //If player doesnt exist
         if (instance == null)
         {
             instance = this;
             canMove = true;
-        }
-        else //If more than one player exists
-        if (instance != this)
+        } //If more than one player exists
+        else if (instance != this)
         {
             Destroy (gameObject);
         }
@@ -76,32 +82,52 @@ public class PlayerController : MonoBehaviour
             rb.MovePosition(rb.position + mov * speed * Time.deltaTime);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collider){
-        if(collider.tag == "Enemy"){
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Enemy")
+        {
             HurtPlayer(20);
         }
-        else if(collider.tag == "Exit"){
-            if(GameObject.FindWithTag("Enemy") != null){
+        else if (collider.tag == "Exit")
+        {
+            if (GameObject.FindWithTag("Enemy") != null)
+            {
                 Debug.Log("Enemies alive, cant move to next level");
-            }else{
+            }
+            else if(doingSetup == false)
+            {
+                doingSetup = true;
                 //Invoke restart function with given delay
-                Invoke ("Restart", levelStartDelay);
+                Invoke("Restart", levelStartDelay);
+
                 //Disable player since level is finished.
                 enabled = false;
             }
         }
     }
-    private void Restart(){
-        SceneManager.LoadScene(0);
+
+    private void Restart()
+    {
+       Debug.Log("STARTING NEW LEVEL FROM PLAYER");
+       GameManager.instance.InitGame(level);
+       transform.position = startPos;
+       enabled=true;
+       level++;
+       doingSetup = false;
     }
 
-    public void HurtPlayer(int damageToGive){
+    public void HurtPlayer(int damageToGive)
+    {
         health -= damageToGive;
-        
+
         CheckIfGameOver();
     }
-    public void CheckIfGameOver(){
-        if(health <= 0){
+
+    public void CheckIfGameOver()
+    {
+        if (health <= 0)
+        {
             GameManager.instance.GameOver();
         }
     }
