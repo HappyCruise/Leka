@@ -17,7 +17,8 @@ public class PlayerProjectile : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     public float speed = 6; //Movement Speed
-    public int damage = 10;
+    public int damage = 10; //Damage to regular enemies
+    public int bossDamage = 1; //Damage to boss enemies
     public int wallDamage = 1;
 
     void Start()
@@ -61,7 +62,7 @@ public class PlayerProjectile : MonoBehaviour
             coll.GetComponent<SCRIPTNAME>.TakeDamage(damage);
              */
         }
-        else if (coll.tag == "Wall" || coll.tag=="OuterWall")
+        else if (coll.tag == "Wall" || coll.tag == "OuterWall")
         {
             Destroy(gameObject);
         }
@@ -69,6 +70,11 @@ public class PlayerProjectile : MonoBehaviour
         {
             Destroy(gameObject);
             coll.GetComponent<DestroyableWall>().DamageWall(wallDamage);
+        }
+        else if (coll.tag == "Boss")
+        {
+            Destroy(gameObject);
+            coll.GetComponent<BossEnemy>().HurtBoss(bossDamage);
         }
     }
 
