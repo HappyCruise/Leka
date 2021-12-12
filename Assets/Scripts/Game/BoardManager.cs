@@ -162,12 +162,6 @@ public class BoardManager : MonoBehaviour
         //Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
         LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
 
-        //Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
-        LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
-
-        //Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
-        LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
-
         //Instantiate the exit tile (always in the same position);
         Instantiate(exit,
         new Vector3(columns - 1, rows - 1, 0f),

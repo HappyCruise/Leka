@@ -80,6 +80,10 @@ public class GameManager : MonoBehaviour
         levelText.text = "Level " + lvl;
 
 
+        //Set the text
+        levelText.text = "Level " + lvl;
+
+
         //Hide image after delay
         Invoke("HideLevelImage", levelStartDelay);
         Debug.Log("SETTING UP LEVEL " + lvl);
