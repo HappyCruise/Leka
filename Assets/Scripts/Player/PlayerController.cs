@@ -107,11 +107,6 @@ public class PlayerController : MonoBehaviour
             Destroy(collider.gameObject);
         }
 
-        else if (collider.tag == "Enemy")
-        {
-            healthManager.HurtPlayer(50);
-        }
-
         else if (collider.tag == "Exit")
         {
             if (GameObject.FindWithTag("Enemy") != null)
