@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private GameObject deathImage; //Image displayed on death
     private Text deathText; //Death text
 
+    private List<Enemy> enemies;
 
     //Store a reference to BoardManager which will setup the level layout
     private BoardManager boardScript;
@@ -48,6 +49,8 @@ public class GameManager : MonoBehaviour
         //Dont destroy this when reloading scene
         // DontDestroyOnLoad(gameObject);
 
+        enemies = new List<Enemy>();
+
         //Reference to BoardManager script
         boardScript = GetComponent<BoardManager>();
 
@@ -69,6 +72,10 @@ public class GameManager : MonoBehaviour
         healthText.SetActive(false); //Hide the health text while starting level
         //Display image
         levelImage.SetActive(true);
+
+        //Set the text
+        levelText.text = "Level " + lvl;
+
 
         //Set the text
         levelText.text = "Level " + lvl;
@@ -100,7 +107,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+    }
+    public void AddEnemyToList(Enemy script)
+    {
+        //Add Enemy to List enemies.
+        enemies.Add(script);
     }
     //Called when the player dies
     public void GameOver()

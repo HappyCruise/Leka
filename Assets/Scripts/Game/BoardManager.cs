@@ -100,7 +100,7 @@ public class BoardManager : MonoBehaviour
                     GameObject;
 
                 //Set the parent of new object to boardHolder to avoid cluttering hierarchy
-                instance.transform.SetParent(boardHolder);
+                instance.transform.SetParent (boardHolder);
             }
         }
     }
@@ -114,7 +114,7 @@ public class BoardManager : MonoBehaviour
         Vector3 randomPosition = gridPositions[randomIndex];
 
         //Remove used position from list
-        gridPositions.RemoveAt(randomIndex);
+        gridPositions.RemoveAt (randomIndex);
 
         //Return random position
         return randomPosition;
@@ -125,7 +125,6 @@ public class BoardManager : MonoBehaviour
     {
         //Choose random number of objects within min and max limits
         int objectCount = Random.Range(minimum, maximum + 1);
-
 
         //Instantiate objects until randomly chosen limit is reached
         for (int i = 0; i < objectCount; i++)
@@ -152,11 +151,13 @@ public class BoardManager : MonoBehaviour
         //Instantiate a random number of wall tiles
         LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
 
-        //Determine number of eneies based on current level
-        int enemyCount = (int)Mathf.Log(level, 2f);
+        LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
 
+        //Determine number of eneies based on current level
+        int enemyCount = (int) Mathf.Log(level, 2f);
+      
         //Instantiate a random number of enemies
-        LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
+        LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 
         //Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
         LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);

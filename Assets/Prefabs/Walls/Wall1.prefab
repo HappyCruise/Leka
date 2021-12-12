@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6822684361984272858}
   m_Layer: 8
   m_Name: Wall1
-  m_TagString: DestroyableWall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,3 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 3
+  damageSprite: {fileID: 0}
