@@ -100,10 +100,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        /*  if (collider.tag == "Enemy")
-         {
-             HurtPlayer(20);
-         } */
+        // if (collider.tag == "Enemy")
+        // {
+        //     HurtPlayer(20);
+        // }
         if (collider.tag == "Food")
         {
             healthManager.AddPlayerHealth(UnityEngine.Random.Range(4, 20));
