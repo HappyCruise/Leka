@@ -13,10 +13,12 @@ public class PlayerHealth : MonoBehaviour
     public float currentHP; //Current health
     public float maxHP = 100; //Max health
     private bool firstLevel = true;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         instance = this;
 
         //If on the first level, set to max HP;
@@ -38,6 +40,7 @@ public class PlayerHealth : MonoBehaviour
     //Enemies call this function to deal damage.
     public void HurtPlayer(int damageToTake)
     {
+        animator.SetTrigger("playerHit");
         currentHP -= damageToTake;
 
 
