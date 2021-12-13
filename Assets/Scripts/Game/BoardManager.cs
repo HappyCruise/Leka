@@ -32,6 +32,9 @@ public class BoardManager : MonoBehaviour
 
     public GameObject exit; //Prefab for the door to next level
     public GameObject boss; //Prefab for boss
+    public GameObject kelaGod;
+    private int kelaLevel = 0;
+    private bool spawnKela;
 
     public GameObject[] floorTiles; //Floor prefabs
 
@@ -77,9 +80,15 @@ public class BoardManager : MonoBehaviour
     //Setup outer walls and floor
     void BoardSetup()
     {
-        //CLEAR ALL ITEMS AND WALLS
 
+
+
+        //CLEAR ALL ITEMS AND WALLS
         List<GameObject> objectsToDestroy = new List<GameObject>(GameObject.FindGameObjectsWithTag("DestroyableWall"));
+        if (objectsToDestroy.Count == 0 && (kelaLevel % 5) == 1 && kelaLevel != 1)
+        {
+            spawnKela = true;
+        }
         objectsToDestroy.AddRange(new List<GameObject>(GameObject.FindGameObjectsWithTag("Food")));
 
         foreach (GameObject obj in objectsToDestroy)
@@ -114,6 +123,15 @@ public class BoardManager : MonoBehaviour
                 //Set the parent of new object to boardHolder to avoid cluttering hierarchy
                 instance.transform.SetParent(boardHolder);
             }
+        }
+        if (spawnKela)
+        {
+            GameObject instance =
+                    Instantiate(kelaGod,
+                    new Vector3(7, 7, 0f),
+                    Quaternion.identity) as
+                    GameObject;
+            spawnKela = false;
         }
     }
 
@@ -154,6 +172,7 @@ public class BoardManager : MonoBehaviour
     //SetupScene initializes level and calls previous functions to layout tiles
     public void SetupScene(int level)
     {
+        kelaLevel = level;
         //Creates the outer walls and floor.
         BoardSetup();
 

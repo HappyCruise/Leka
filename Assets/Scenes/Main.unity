@@ -789,6 +789,7 @@ MonoBehaviour:
     maximum: 3
   exit: {fileID: 214823565797993208, guid: 5313664cf320f5e42894bdb2dbd69d23, type: 3}
   boss: {fileID: 4832286922975276656, guid: 2028a3d52f751074e9827cda331eefa6, type: 3}
+  kelaGod: {fileID: 4442523287297918308, guid: 7fbcd82c5c11f1c4aadd49ff4879693d, type: 3}
   floorTiles:
   - {fileID: 5475119712655370047, guid: e60229921b394c74395acc6bdd89bcf9, type: 3}
   - {fileID: 8493554186116599323, guid: 2ff0f7c4a9f50e84fb7b359fd38fb64b, type: 3}
@@ -1341,7 +1342,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

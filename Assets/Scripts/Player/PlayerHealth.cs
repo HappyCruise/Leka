@@ -40,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
     public void HurtPlayer(int damageToTake)
     {
         animator.SetTrigger("playerHit");
-        
+
         currentHP -= damageToTake;
 
 
@@ -64,6 +64,12 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthText();
     }
 
+    //Increase max hp
+    public void AddPlayerMaxHealth(int hpToAdd)
+    {
+        maxHP += hpToAdd;
+        AddPlayerHealth(10);
+    }
     //Set player to full HP
     public void SetMaxHealth()
     {
@@ -76,7 +82,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHP <= 0)
         {
-            SoundManager.instance.PlaySingle (gameOverSound);
+            SoundManager.instance.PlaySingle(gameOverSound);
             GameManager.instance.GameOver();
             return true;
         }

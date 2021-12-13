@@ -14,9 +14,9 @@ public class PlayerController : MonoBehaviour
 
     public AudioClip moveSound1;    //Audio walking
     public AudioClip moveSound2;
-	public AudioClip eatSound1;     //Audio eat
-	public AudioClip drinkSound1;   //Audio drink
-		
+    public AudioClip eatSound1;     //Audio eat
+    public AudioClip drinkSound1;   //Audio drink
+
 
     private Rigidbody2D rb;
     private Vector2 mov;
@@ -107,10 +107,14 @@ public class PlayerController : MonoBehaviour
         if (collider.tag == "Food")
         {
             healthManager.AddPlayerHealth(UnityEngine.Random.Range(4, 20));
-            SoundManager.instance.RandomizeSfx (eatSound1, drinkSound1);
+            SoundManager.instance.RandomizeSfx(eatSound1, drinkSound1);
             Destroy(collider.gameObject);
         }
-
+        else if (collider.tag == "Kela")
+        {
+            healthManager.AddPlayerMaxHealth(10);
+            Destroy(collider.gameObject);
+        }
         else if (collider.tag == "Exit")
         {
             if (GameObject.FindWithTag("Enemy") != null || GameObject.FindWithTag("Boss") != null)
