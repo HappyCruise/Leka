@@ -7,8 +7,6 @@ public class PlayerHealth : MonoBehaviour
 {
     //Only allow one instance
     public static PlayerHealth instance;
-
-
     public Text healthText; //Health text
     public float currentHP; //Current health
     public float maxHP = 100; //Max health
