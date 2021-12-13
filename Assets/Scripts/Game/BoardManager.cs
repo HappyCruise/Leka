@@ -27,8 +27,8 @@ public class BoardManager : MonoBehaviour
 
     public int rows = 12;
 
-    public Count wallCount = new Count(5, 9); //How many walls to place on the board
-    public Count foodCount = new Count(1, 3); //How many foodtiles to place on the board
+    public Count wallCount = new Count(5, 20); //How many walls to place on the board
+    public Count foodCount = new Count(0, 3); //How many foodtiles to place on the board
 
     public GameObject exit; //Prefab for the door to next level
     public GameObject boss; //Prefab for boss

@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
     }
+    
     public void AddEnemyToList(Enemy script)
     {
         //Add Enemy to List enemies.

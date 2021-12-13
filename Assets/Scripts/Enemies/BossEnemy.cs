@@ -48,7 +48,7 @@ public class BossEnemy : Enemy
     {
         if (currentHealth <= 0)
         {
-            animator.SetTrigger("EnemyDeath"); //TODO onks tää oikei :D
+            animator.SetTrigger("enemyDead"); //TODO onks tää oikei :D
             Destroy(gameObject);
         }
     }

@@ -107,7 +107,6 @@ public class PlayerController : MonoBehaviour
         if (collider.tag == "Food")
         {
             healthManager.AddPlayerHealth(UnityEngine.Random.Range(4, 20));
-            SoundManager.instance.RandomizeSfx (eatSound1, drinkSound1);
             Destroy(collider.gameObject);
         }
 
