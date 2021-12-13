@@ -7,34 +7,49 @@ using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
-    public int playerDamage;                            //The amount of health points to subtract from the player when attacking.
+    public int playerDamage; //The amount of health points to subtract from the player when attacking.
+
     public bool isBoss = false;
-    public AudioClip attackSound1;                      //First of two audio clips to play when attacking the player.
+
+    public bool isGhost = false;
+
+    public AudioClip attackSound1; //First of two audio clips to play when attacking the player.
+
     public AudioClip attackSound2;
 
-    public float moveTime = 0.1f;           //Time it will take object to move, in seconds.
-    public LayerMask blockingLayer;         //Layer on which collision will be checked.
+    public float moveTime = 0.1f; //Time it will take object to move, in seconds.
+
+    public LayerMask blockingLayer; //Layer on which collision will be checked.
+
     public float speed = 1f;
-    public Animator animator;                          //Variable of type Animator to store a reference to the enemy's Animator component.
+
+    public Animator animator; //Variable of type Animator to store a reference to the enemy's Animator component.
+
     public Transform target;
+
     public bool canMove;
 
-    public BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
-    public Rigidbody2D rb2D;               //The Rigidbody2D component attached to this object.
-    public float inverseMoveTime;          //Used to make movement more efficient.
-    public bool isMoving;                  //Is the object currently moving.
-    public float startTimeBetweenAttacks = 1.0f;
-    public float timeBetweenAttacks;
+    public BoxCollider2D boxCollider; //The BoxCollider2D component attached to this object.
 
+    public Rigidbody2D rb2D; //The Rigidbody2D component attached to this object.
+
+    public float inverseMoveTime; //Used to make movement more efficient.
+
+    public bool isMoving; //Is the object currently moving.
+
+    public float startTimeBetweenAttacks = 1.0f;
+
+    public float timeBetweenAttacks;
 
     private PlayerHealth healthManager;
 
     public SpriteRenderer spriteRenderer;
 
+    public float startTime = 0.5f;
+
     //Protected, virtual functions can be overridden by inheriting classes.
     void Start()
     {
-
         GameManager.instance.AddEnemyToList(this);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -61,27 +76,30 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-
-        MoveEnemy();
+        if (startTime > 0)
+        {
+            startTime -= Time.deltaTime;
+        }
+        else
+        {
+            timeBetweenAttacks -= Time.deltaTime; //Decrease attack time
+            MoveEnemy();
+        }
     }
 
-
-
-    bool Move(int xDir, int yDir, out RaycastHit2D hit)
+    protected bool Move(int xDir, int yDir, out RaycastHit2D hit)
     {
         if (isBoss)
         {
             if (xDir == -1)
                 spriteRenderer.flipX = true;
-            else if (xDir == 1)
-                spriteRenderer.flipX = false;
+            else if (xDir == 1) spriteRenderer.flipX = false;
         }
         else
         {
             if (xDir == 1)
                 spriteRenderer.flipX = true;
-            else if (xDir == -1)
-                spriteRenderer.flipX = false;
+            else if (xDir == -1) spriteRenderer.flipX = false;
         }
 
         //Store start position to move from, based on objects current transform position.
@@ -118,7 +136,8 @@ public class Enemy : MonoBehaviour
         //The object is now moving.
         isMoving = true;
 
-        //Calculate the remaining distance to move based on the square magnitude of the difference between current position and end parameter. 
+        //Calculate the remaining distance to move based on the square magnitude of the difference between current position and end parameter.
+
         //Square magnitude is used instead of magnitude because it's computationally cheaper.
         float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
 
@@ -126,10 +145,14 @@ public class Enemy : MonoBehaviour
         while (sqrRemainingDistance > float.Epsilon)
         {
             //Find a new position proportionally closer to the end, based on the moveTime
-            Vector3 newPostion = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
+            Vector3 newPostion =
+                Vector3
+                    .MoveTowards(rb2D.position,
+                    end,
+                    inverseMoveTime * Time.deltaTime);
 
             //Call MovePosition on attached Rigidbody2D and move it to the calculated position.
-            rb2D.MovePosition(newPostion);
+            rb2D.MovePosition (newPostion);
 
             //Recalculate the remaining distance after moving.
             sqrRemainingDistance = (transform.position - end).sqrMagnitude;
@@ -139,7 +162,7 @@ public class Enemy : MonoBehaviour
         }
 
         //Make sure the object is exactly at the end of its movement.
-        rb2D.MovePosition(end);
+        rb2D.MovePosition (end);
 
         //The object is no longer moving.
         isMoving = false;
@@ -148,7 +171,6 @@ public class Enemy : MonoBehaviour
     void AttemptMove<T>(int xDir, int yDir)
         where T : Component
     {
-
         //Hit will store whatever our linecast hits when Move is called.
         RaycastHit2D hit;
 
@@ -165,13 +187,12 @@ public class Enemy : MonoBehaviour
 
         //If canMove is false and hitComponent is not equal to null, meaning MovingObject is blocked and has hit something it can interact with.
         if (!canMove && hitComponent != null)
-
             //Call the OnCantMove function and pass it hitComponent as a parameter.
             OnCantMove(hitComponent);
     }
+
     public void MoveEnemy()
     {
-
         //Declare variables for X and Y axis move directions, these range from -1 to 1.
         //These values allow us to choose between the cardinal directions: up, down, left and right.
         int xDir = 0;
@@ -179,65 +200,84 @@ public class Enemy : MonoBehaviour
 
         if (target.position.x > transform.position.x)
             xDir = 1;
-
-        else if (target.position.x < transform.position.x)
-            xDir = -1;
+        else if (target.position.x < transform.position.x) xDir = -1;
 
         if (target.position.y > transform.position.y)
             yDir = 1;
-
-        else if (target.position.y < transform.position.y)
-            yDir = -1;
+        else if (target.position.y < transform.position.y) yDir = -1;
 
         //Call the AttemptMove function and pass in the generic parameter Player, because Enemy is moving and expecting to potentially encounter a Player
-        AttemptMove<PlayerHealth>(xDir, yDir);
+        AttemptMove<PlayerHealth> (xDir, yDir);
     }
 
     void OnCantMove<T>(T component)
         where T : Component
     {
-
         //Declare hitPlayer and set it to equal the encountered component.
         PlayerHealth hitPlayer = component as PlayerHealth;
-
 
         if (timeBetweenAttacks <= 0)
         {
             //Call the HurtPlayer function of hitPlayer passing it playerDamage, the amount of healthpoints to be subtracted.
-            hitPlayer.HurtPlayer(playerDamage);
+            hitPlayer.HurtPlayer (playerDamage);
             timeBetweenAttacks = startTimeBetweenAttacks;
+			//Set the attack trigger of animator to trigger Enemy attack animation.
+		SoundManager.instance.PlaySingle (attackSound1);
+        animator.SetTrigger("enemyAttack");
         }
         else
         {
             timeBetweenAttacks -= Time.deltaTime;
         }
 
-        //Set the attack trigger of animator to trigger Enemy attack animation.
-        animator.SetTrigger("enemyAttack");
-
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-
-        if (collider.tag == "DestroyableWall")
+        if (!isGhost)
         {
-            //If ready to attack
-            if (timeBetweenAttacks <= 0)
+            if (collider.tag == "DestroyableWall")
             {
-                animator.SetTrigger("enemyAttack");
-                // StartCoroutine(DamageWall(collider));
-                if (collider != null)
+                //If ready to attack
+                if (timeBetweenAttacks <= 0)
                 {
-                    collider.GetComponent<DestroyableWall>().DamageWall(1);
+					
+                    animator.SetTrigger("enemyAttack");
+					SoundManager.instance.PlaySingle (attackSound2);
+                    // StartCoroutine(DamageWall(collider));
+                    if (collider != null)
+                    {
+                        collider.GetComponent<DestroyableWall>().DamageWall(1);
+                    }
+                    timeBetweenAttacks = startTimeBetweenAttacks; //Reset attack time
                 }
-                timeBetweenAttacks = startTimeBetweenAttacks; //Reset attack time
             }
-            else
-            {
-                timeBetweenAttacks -= Time.deltaTime; //Decrease attack time
-            }
+        }
+    }
 
+    void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (isGhost)
+        {
+            Debug.Log(collider.gameObject.tag);
+
+            if (collider.gameObject.tag == "Player")
+            {
+                Debug.Log(collider.gameObject.layer);
+                if (timeBetweenAttacks <= 0)
+                {
+					animator.SetTrigger("enemyAttack");
+					
+                    //Call the HurtPlayer function of hitPlayer passing it playerDamage, the amount of healthpoints to be subtracted.
+                    collider
+                        .gameObject
+                        .GetComponent<PlayerHealth>()
+                        .HurtPlayer(playerDamage);
+                    timeBetweenAttacks = startTimeBetweenAttacks;
+					SoundManager.instance.PlaySingle (attackSound2);
+                }
+            }
         }
     }
 }

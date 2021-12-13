@@ -661,7 +661,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: 2DRoguelike
-  metroPackageVersion: 
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -669,7 +669,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: 2DRoguelike
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: LEKA
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
@@ -717,12 +717,15 @@ PlayerSettings:
   cloudServicesEnabled:
     Analytics: 0
     Build: 0
-    Collab: 1
+    Collab: 0
     ErrorHub: 0
+    Game Performance: 0
     Game_Performance: 0
     Hub: 0
     Purchasing: 0
+    UDP: 0
     UNet: 0
+    Unity Ads: 0
     Unity_Ads: 0
   luminIcon:
     m_Name: 
@@ -737,11 +740,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 4736703c-6ffb-4c45-a381-78ec6bd976ab
+  cloudProjectId: ca910a39-1358-4fa2-b9a9-8f6e725e3116
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: LEKA
-  organizationId: happycruise
+  organizationId: chebbo
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 1
   virtualTexturingSupportEnabled: 0

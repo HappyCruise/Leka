@@ -165,10 +165,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDamage: 5
-  attackSound1: {fileID: 8300000, guid: 0db8cac2749584a009540aa5671ee80d, type: 3}
-  attackSound2: {fileID: 8300000, guid: 0db8cac2749584a009540aa5671ee80d, type: 3}
-  moveTime: 0.05
+  isBoss: 0
+  isGhost: 0
+  attackSound1: {fileID: 8300000, guid: 4c2332bc8245b474dad63074059bb755, type: 3}
+  attackSound2: {fileID: 8300000, guid: f6aaac83be9e0493493aace800b76619, type: 3}
+  moveTime: 0.03
   blockingLayer:
     serializedVersion: 2
     m_Bits: 256
+  speed: 1
+  animator: {fileID: 0}
+  target: {fileID: 0}
   canMove: 0
+  boxCollider: {fileID: 0}
+  rb2D: {fileID: 0}
+  inverseMoveTime: 0
+  isMoving: 0
+  startTimeBetweenAttacks: 1
+  timeBetweenAttacks: 0
+  spriteRenderer: {fileID: 0}
+  startTime: 1

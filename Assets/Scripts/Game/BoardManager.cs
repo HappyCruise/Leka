@@ -49,18 +49,27 @@ public class BoardManager : MonoBehaviour
 
 
     //Clear gridPositions and prepare for new board
+    //Clear gridPositions and prepare for new board
     void InitialiseList()
     {
         gridPositions.Clear();
 
         //Loop trough columns (x axis)
-        for (int x = 4; x < columns; x++) //Dont spawn objects within the 1st 3 tiles to give room for player
+        for (int x = 0; x < columns; x++)
         {
             //Loop trough rows (y axis)
-            for (int y = 4; y < rows; y++) //Dont spawn objects within the 1st 3 tiles to give room for player
+            for (int y = 0; y < rows; y++)
             {
                 //For each position add a new Vector3 to gridPositions with coordinates
                 gridPositions.Add(new Vector3(x, y, 0f));
+            }
+        }
+        // Dont spawn objects within the 1st 2 tiles to give room for player
+        for (int x = 0; x < 2; x++)
+        {
+            for (int y = 0; y < 2; y++)
+            {
+                gridPositions.Remove(new Vector3(x, y, 0f));
             }
         }
     }

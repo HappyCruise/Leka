@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2026993019662063949}
   - component: {fileID: 7083955089228758955}
   - component: {fileID: 6336576828665389128}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Enemy4
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7525369117733502861}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -165,14 +165,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da893f448bc82541a4d3a8c7d051d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDamage: 20
+  playerDamage: 15
   isBoss: 1
-  attackSound1: {fileID: 0}
-  attackSound2: {fileID: 0}
-  moveTime: 0.1
+  isGhost: 1
+  attackSound1: {fileID: 8300000, guid: 4c2332bc8245b474dad63074059bb755, type: 3}
+  attackSound2: {fileID: 8300000, guid: f6aaac83be9e0493493aace800b76619, type: 3}
+  moveTime: 0.07
   blockingLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   speed: 1
   animator: {fileID: 0}
   target: {fileID: 0}
@@ -184,3 +185,4 @@ MonoBehaviour:
   startTimeBetweenAttacks: 1
   timeBetweenAttacks: 0
   spriteRenderer: {fileID: 0}
+  startTime: 1

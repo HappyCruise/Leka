@@ -68,13 +68,13 @@ public class PlayerProjectile : MonoBehaviour
         }
         else if (coll.tag == "DestroyableWall")
         {
-            Destroy(gameObject);
             coll.GetComponent<DestroyableWall>().DamageWall(wallDamage);
+            Destroy(gameObject);
         }
         else if (coll.tag == "Boss")
         {
-            Destroy(gameObject);
             coll.GetComponent<BossEnemy>().HurtBoss(bossDamage);
+            Destroy(gameObject);
         }
     }
 

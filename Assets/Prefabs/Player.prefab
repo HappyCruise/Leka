@@ -167,8 +167,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd36abb11c13272479e4ec84141256e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 2
   levelStartDelay: 0.5
   speed: 4
+  moveSound1: {fileID: 8300000, guid: 892962212a4b74d1c9f578a3b6ea6439, type: 3}
+  moveSound2: {fileID: 8300000, guid: a826bc3d758db43d6ae9caf415b63d1d, type: 3}
+  eatSound1: {fileID: 8300000, guid: 1cb61f83d60374c7389bb547431919e3, type: 3}
+  drinkSound1: {fileID: 8300000, guid: b6b608537288246c9a464915db27bf52, type: 3}
   canMove: 0
   canMelee: 0
   canShoot: 0
@@ -213,5 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a700ad82dc2f44aaa43c88513e5081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthText: {fileID: 0}
   currentHP: 0
   maxHP: 100
+  gameOverSound: {fileID: 8300000, guid: e2beefeb2273f4efe992adf5b8d67c29, type: 3}

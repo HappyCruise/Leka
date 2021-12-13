@@ -40,12 +40,12 @@ public class PlayerHealth : MonoBehaviour
     public void HurtPlayer(int damageToTake)
     {
         animator.SetTrigger("playerHit");
+        
         currentHP -= damageToTake;
 
 
         if (!CheckIfGameOver()) //Check if player died. 
             UpdateHealthText(); //Update healthText if didnt.
-
 
         //TODO: Add animation and sound for getting hit;
     }
@@ -53,6 +53,7 @@ public class PlayerHealth : MonoBehaviour
     //Add health to player
     public void AddPlayerHealth(int hpToGive)
     {
+
         currentHP += hpToGive;
 
         //If health is more than the maximum value, set it to the maximum value.
