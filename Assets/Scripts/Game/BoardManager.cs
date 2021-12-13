@@ -31,6 +31,7 @@ public class BoardManager : MonoBehaviour
     public Count foodCount = new Count(1, 3); //How many foodtiles to place on the board
 
     public GameObject exit; //Prefab for the door to next level
+    public GameObject boss; //Prefab for boss
 
     public GameObject[] floorTiles; //Floor prefabs
 
@@ -68,13 +69,13 @@ public class BoardManager : MonoBehaviour
     void BoardSetup()
     {
         //CLEAR ALL ITEMS AND WALLS
-        
+
         List<GameObject> objectsToDestroy = new List<GameObject>(GameObject.FindGameObjectsWithTag("DestroyableWall"));
-        objectsToDestroy.AddRange(new List<GameObject> (GameObject.FindGameObjectsWithTag("Food")));
-        
+        objectsToDestroy.AddRange(new List<GameObject>(GameObject.FindGameObjectsWithTag("Food")));
+
         foreach (GameObject obj in objectsToDestroy)
         {
-            Destroy(obj);   
+            Destroy(obj);
         }
 
         //Instantiate Board and set boardHolder to its transform
@@ -102,7 +103,7 @@ public class BoardManager : MonoBehaviour
                     GameObject;
 
                 //Set the parent of new object to boardHolder to avoid cluttering hierarchy
-                instance.transform.SetParent (boardHolder);
+                instance.transform.SetParent(boardHolder);
             }
         }
     }
@@ -116,7 +117,7 @@ public class BoardManager : MonoBehaviour
         Vector3 randomPosition = gridPositions[randomIndex];
 
         //Remove used position from list
-        gridPositions.RemoveAt (randomIndex);
+        gridPositions.RemoveAt(randomIndex);
 
         //Return random position
         return randomPosition;
@@ -150,17 +151,32 @@ public class BoardManager : MonoBehaviour
         //Reset gridPosition list
         InitialiseList();
 
+
+        //Are we on a boss stage
+        if (level % 5 == 0)
+        {
+            int x = columns / 2;
+            int y = rows / 2;
+
+            //Spawn a boss enemy in the middle of the board.
+            Instantiate(boss,
+            new Vector3(x, y, 0f),
+            Quaternion.identity);
+
+            gridPositions.Remove(new Vector3(x, y, 0f));
+        }
         //Instantiate a random number of wall tiles
         LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
 
         //Determine number of eneies based on current level
-        int enemyCount = (int) Mathf.Log(level, 2f);
-      
+        int enemyCount = (int)Mathf.Log(level, 2f);
+
         //Instantiate a random number of enemies
-        LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
+        LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
 
         //Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
         LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
+
 
         //Instantiate the exit tile (always in the same position);
         Instantiate(exit,

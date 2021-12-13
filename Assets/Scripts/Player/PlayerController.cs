@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    private int level = 2;
+    public int level = 2;
     public float levelStartDelay = 1f;
     private bool doingSetup = false;
     public float speed = 4f; //Player speed
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
         else if (collider.tag == "Exit")
         {
-            if (GameObject.FindWithTag("Enemy") != null)
+            if (GameObject.FindWithTag("Enemy") != null || GameObject.FindWithTag("Boss") != null)
             {
                 Debug.Log("Enemies alive, cant move to next level");
             }

@@ -8,29 +8,28 @@ using UnityEngine.SceneManagement;
 public class Enemy : MonoBehaviour
 {
     public int playerDamage;                            //The amount of health points to subtract from the player when attacking.
+    public bool isBoss = false;
     public AudioClip attackSound1;                      //First of two audio clips to play when attacking the player.
     public AudioClip attackSound2;
 
     public float moveTime = 0.1f;           //Time it will take object to move, in seconds.
     public LayerMask blockingLayer;         //Layer on which collision will be checked.
     public float speed = 1f;
-    private Animator animator;                          //Variable of type Animator to store a reference to the enemy's Animator component.
-    private Transform target;
+    public Animator animator;                          //Variable of type Animator to store a reference to the enemy's Animator component.
+    public Transform target;
     public bool canMove;
 
-    private BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
-    private Rigidbody2D rb2D;               //The Rigidbody2D component attached to this object.
-    private float inverseMoveTime;          //Used to make movement more efficient.
-    private bool isMoving;                  //Is the object currently moving.
-    private float startTimeBetweenAttacks = 1.0f;
-    private float timeBetweenAttacks;
+    public BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
+    public Rigidbody2D rb2D;               //The Rigidbody2D component attached to this object.
+    public float inverseMoveTime;          //Used to make movement more efficient.
+    public bool isMoving;                  //Is the object currently moving.
+    public float startTimeBetweenAttacks = 1.0f;
+    public float timeBetweenAttacks;
 
-    private float wallStartTime = 1.0f;
-    private float wallTime = 0;
 
     private PlayerHealth healthManager;
 
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     //Protected, virtual functions can be overridden by inheriting classes.
     void Start()
@@ -70,10 +69,21 @@ public class Enemy : MonoBehaviour
 
     bool Move(int xDir, int yDir, out RaycastHit2D hit)
     {
-        if (xDir == 1)
-            spriteRenderer.flipX = true;
-        else if (xDir == -1)
-            spriteRenderer.flipX = false;
+        if (isBoss)
+        {
+            if (xDir == -1)
+                spriteRenderer.flipX = true;
+            else if (xDir == 1)
+                spriteRenderer.flipX = false;
+        }
+        else
+        {
+            if (xDir == 1)
+                spriteRenderer.flipX = true;
+            else if (xDir == -1)
+                spriteRenderer.flipX = false;
+        }
+
         //Store start position to move from, based on objects current transform position.
         Vector2 start = transform.position;
 
@@ -193,7 +203,7 @@ public class Enemy : MonoBehaviour
 
         if (timeBetweenAttacks <= 0)
         {
-            //Call the LoseFood function of hitPlayer passing it playerDamage, the amount of foodpoints to be subtracted.
+            //Call the HurtPlayer function of hitPlayer passing it playerDamage, the amount of healthpoints to be subtracted.
             hitPlayer.HurtPlayer(playerDamage);
             timeBetweenAttacks = startTimeBetweenAttacks;
         }
@@ -213,29 +223,21 @@ public class Enemy : MonoBehaviour
         if (collider.tag == "DestroyableWall")
         {
             //If ready to attack
-            if (wallTime <= 0)
+            if (timeBetweenAttacks <= 0)
             {
                 animator.SetTrigger("enemyAttack");
-                StartCoroutine(DamageWall(collider));
-                wallTime = wallStartTime; //Reset attack time
+                // StartCoroutine(DamageWall(collider));
+                if (collider != null)
+                {
+                    collider.GetComponent<DestroyableWall>().DamageWall(1);
+                }
+                timeBetweenAttacks = startTimeBetweenAttacks; //Reset attack time
             }
             else
             {
-                wallTime -= Time.deltaTime; //Decrease attack time
+                timeBetweenAttacks -= Time.deltaTime; //Decrease attack time
             }
 
         }
-    }
-    IEnumerator DamageWall(Collider2D collider)
-    {
-        //Wait for the duration of animation
-        yield return new WaitForSeconds(0.7f);
-
-        //If wall wasnt destroyed already
-        if (collider != null)
-        {
-            collider.GetComponent<DestroyableWall>().DamageWall(1);
-        }
-
     }
 }
