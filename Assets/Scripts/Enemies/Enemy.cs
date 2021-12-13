@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
-    public float startTime = 0.5f;
+    protected float startTime = 1.2f;
 
     //Protected, virtual functions can be overridden by inheriting classes.
     void Start()
@@ -152,7 +152,7 @@ public class Enemy : MonoBehaviour
                     inverseMoveTime * Time.deltaTime);
 
             //Call MovePosition on attached Rigidbody2D and move it to the calculated position.
-            rb2D.MovePosition (newPostion);
+            rb2D.MovePosition(newPostion);
 
             //Recalculate the remaining distance after moving.
             sqrRemainingDistance = (transform.position - end).sqrMagnitude;
@@ -162,7 +162,7 @@ public class Enemy : MonoBehaviour
         }
 
         //Make sure the object is exactly at the end of its movement.
-        rb2D.MovePosition (end);
+        rb2D.MovePosition(end);
 
         //The object is no longer moving.
         isMoving = false;
@@ -207,7 +207,7 @@ public class Enemy : MonoBehaviour
         else if (target.position.y < transform.position.y) yDir = -1;
 
         //Call the AttemptMove function and pass in the generic parameter Player, because Enemy is moving and expecting to potentially encounter a Player
-        AttemptMove<PlayerHealth> (xDir, yDir);
+        AttemptMove<PlayerHealth>(xDir, yDir);
     }
 
     void OnCantMove<T>(T component)
@@ -219,18 +219,18 @@ public class Enemy : MonoBehaviour
         if (timeBetweenAttacks <= 0)
         {
             //Call the HurtPlayer function of hitPlayer passing it playerDamage, the amount of healthpoints to be subtracted.
-            hitPlayer.HurtPlayer (playerDamage);
+            hitPlayer.HurtPlayer(playerDamage);
             timeBetweenAttacks = startTimeBetweenAttacks;
-			//Set the attack trigger of animator to trigger Enemy attack animation.
-		SoundManager.instance.PlaySingle (attackSound1);
-        animator.SetTrigger("enemyAttack");
+            //Set the attack trigger of animator to trigger Enemy attack animation.
+            SoundManager.instance.PlaySingle(attackSound1);
+            animator.SetTrigger("enemyAttack");
         }
         else
         {
             timeBetweenAttacks -= Time.deltaTime;
         }
 
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -242,13 +242,13 @@ public class Enemy : MonoBehaviour
                 //If ready to attack
                 if (timeBetweenAttacks <= 0)
                 {
-					
+
                     animator.SetTrigger("enemyAttack");
-					SoundManager.instance.PlaySingle (attackSound2);
+                    SoundManager.instance.PlaySingle(attackSound2);
                     // StartCoroutine(DamageWall(collider));
                     if (collider != null)
                     {
-                        collider.GetComponent<DestroyableWall>().DamageWall(1);
+                        collider.GetComponent<DestroyableWall>().DamageWall(2);
                     }
                     timeBetweenAttacks = startTimeBetweenAttacks; //Reset attack time
                 }
@@ -267,15 +267,15 @@ public class Enemy : MonoBehaviour
                 Debug.Log(collider.gameObject.layer);
                 if (timeBetweenAttacks <= 0)
                 {
-					animator.SetTrigger("enemyAttack");
-					
+                    animator.SetTrigger("enemyAttack");
+
                     //Call the HurtPlayer function of hitPlayer passing it playerDamage, the amount of healthpoints to be subtracted.
                     collider
                         .gameObject
                         .GetComponent<PlayerHealth>()
                         .HurtPlayer(playerDamage);
                     timeBetweenAttacks = startTimeBetweenAttacks;
-					SoundManager.instance.PlaySingle (attackSound2);
+                    SoundManager.instance.PlaySingle(attackSound2);
                 }
             }
         }

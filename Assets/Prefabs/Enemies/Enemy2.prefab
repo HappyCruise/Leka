@@ -184,4 +184,4 @@ MonoBehaviour:
   startTimeBetweenAttacks: 1
   timeBetweenAttacks: 0
   spriteRenderer: {fileID: 0}
-  startTime: 1
+  startTime: 1.2
